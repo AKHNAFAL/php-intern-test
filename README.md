@@ -1,7 +1,12 @@
 # Nomor 1
 Ini untuk meng-run file PHP.CLI.php
 
-Untuk mengetahui output dari file PHP-CLI.php, pastikan php terinstall. Kemudian pastikan terminal anda berada di directory ASI/php-cli. Kemudian, run command: php PHP-CLI.php
+Untuk mengetahui output dari file PHP-CLI.php, pastikan php terinstall. Kemudian pastikan terminal anda berada di directory ASI/php-cli. 
+
+Kemudian, run command: 
+```bash
+php PHP-CLI.php
+```
 
 # Nomor 2
 

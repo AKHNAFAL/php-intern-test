@@ -34,4 +34,6 @@ php artisan key:generate
 
 # Penjelasnan
 
-Saya pertama membuat database di laragon mysql da nmenyesuaikannya di .env. Kemudian membuat migrate untuk create table employee dan menjalankan php artisan migrate:fresh. Kemudian membuat model yang sesuai dengan tabel. Setelah membuat CRUD controller. Bersamaan dengan tambahan di file config php-laravel\config\filesystems.php dimana saya menambahkan 'cloud' => env('FILESYSTEM_CLOUD', 's3'), 
+Saya pertama membuat database di laragon mysql da nmenyesuaikannya di .env. Kemudian membuat migrate untuk create table employee dan menjalankan php artisan migrate:fresh. Kemudian membuat model yang sesuai dengan tabel. Setelah membuat CRUD controller. Bersamaan dengan dengan tambahan intergrasi:
+- isi field photo_upload_path adalah URL dari hasil upload S3.
+- buatkan redis dengan index emp_<nomor> yang berisi json record dari table.

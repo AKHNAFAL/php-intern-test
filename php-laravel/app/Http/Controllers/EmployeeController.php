@@ -34,11 +34,17 @@ class EmployeeController extends Controller
         ]);
 
         $validated['created_on'] = now();
-        $validated['created_by'] = Auth::user()->name;
+        $validated['created_by'] = Auth::user()->name ?? 'system';
 
         if ($request->hasFile('photo')) {
-            $path = $request->file('photo')->store('photos', 's3');
-            $validated['photo_upload_path'] = Storage::url($path);
+            $file = $request->file('photo');
+            $tujuan_upload = 'photos';
+            $filename = $file->getClientOriginalName();
+            Storage::disk('s3')->putFileAs($tujuan_upload, $file, $filename);
+            Storage::disk('s3')->setVisibility($tujuan_upload . '/' . $filename, 'public');
+            $baseUrl = config('filesystems.disks.s3.url') ?? config('filesystems.disks.s3.endpoint');
+            $path = $tujuan_upload . '/' . $filename;
+            $validated['photo_upload_path'] = rtrim($baseUrl, '/') . '/' . ltrim($path, '/');
         }
 
         $employee = Employee::create($validated);
@@ -75,15 +81,21 @@ class EmployeeController extends Controller
             'nama' => 'sometimes|required|string|max:150',
             'jabatan' => 'nullable|string|max:200',
             'talahir' => 'nullable|date',
-            'photo' => 'nullable|string|max:150',
+            'photo' => 'nullable|file|image|max:2048',
             'updated_by' => 'nullable|string|max:150',
         ]);
 
         $validated['updated_on'] = now();
 
         if ($request->hasFile('photo')) {
-            $path = $request->file('photo')->store('photos', 's3');
-            $validated['photo_upload_path'] = Storage::url($path);
+            $file = $request->file('photo');
+            $tujuan_upload = 'photos';
+            $filename = $file->getClientOriginalName();
+            Storage::disk('s3')->putFileAs($tujuan_upload, $file, $filename);
+            Storage::disk('s3')->setVisibility($tujuan_upload . '/' . $filename, 'public');
+            $baseUrl = config('filesystems.disks.s3.url') ?? config('filesystems.disks.s3.endpoint');
+            $path = $tujuan_upload . '/' . $filename;
+            $validated['photo_upload_path'] = rtrim($baseUrl, '/') . '/' . ltrim($path, '/');
         }
 
         $employee->update($validated);

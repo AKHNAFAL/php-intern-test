@@ -31,3 +31,7 @@ composer install
 cp .env.example .env
 php artisan key:generate
 ```
+
+# Penjelasnan
+
+Saya pertama membuat database di laragon mysql da nmenyesuaikannya di .env. Kemudian membuat migrate untuk create table employee dan menjalankan php artisan migrate:fresh. Kemudian membuat model yang sesuai dengan tabel. Setelah membuat CRUD controller. Bersamaan dengan tambahan di file config php-laravel\config\filesystems.php dimana saya menambahkan 'cloud' => env('FILESYSTEM_CLOUD', 's3'), 

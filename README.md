@@ -20,13 +20,7 @@ cd php-intern-test
 composer install
 ```
 
-## 3. Install Dependency Frontend
-
-```bash
-npm install
-```
-
-## 4. Salin dan Konfigurasi .env
+## 3. Salin dan Konfigurasi .env
 
 ```bash
 cp .env.example .env
